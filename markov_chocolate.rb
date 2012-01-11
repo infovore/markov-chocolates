@@ -2,8 +2,8 @@
 
 require "rubygems"
 require "bundler/setup"
-require "lib/array.rb"
-require "lib/markov_chain.rb"
+require "#{File.dirname(__FILE__)}/lib/array.rb"
+require "#{File.dirname(__FILE__)}/lib/markov_chain.rb"
 
 Bundler.require(:default)
 
