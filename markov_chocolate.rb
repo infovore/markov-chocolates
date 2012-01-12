@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
-require "rubygems"
-require "bundler/setup"
-Bundler.require(:default)
+require 'rubygems'
+require 'open-uri'
+require 'nokogiri'
+require 'twitter'
+require 'yaml'
 require "#{File.dirname(__FILE__)}/lib/array.rb"
 require "#{File.dirname(__FILE__)}/lib/markov_chain.rb"
 
@@ -21,9 +23,12 @@ Twitter.configure do |config|
   config.oauth_token_secret = ACCESS_TOKEN_SECRET
 end
 
-mc = MarkovChain.new(File.read("chocolate.txt"))
+
+mc = MarkovChain.new(File.read(PATH_PREFIX + "/chocolate.txt"))
+
+prob = ARGV[0] || 120
 # one in 120 times, generate a chain
-if(rand(120) < 1)
+if(rand(prob) < 1)
 # if it's less than 141 chars, tweet it
   string = mc.sentences(1).capitalize
 # otherwise re-generate until it fits
