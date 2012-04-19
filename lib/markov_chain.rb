@@ -44,7 +44,7 @@ class MarkovChain
   def sentences(count = 1, start_word = nil)
     word      = start_word || random_word
     sentences = ''
-    until sentences.count('.') == count
+    while sentences.count('.') < count
       sentences << word << ' '
       word = get(word)
     end
